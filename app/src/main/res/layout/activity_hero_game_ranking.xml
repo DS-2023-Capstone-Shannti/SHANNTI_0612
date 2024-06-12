@@ -18,31 +18,14 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
-        <TextView
-            android:id="@+id/tvRankingTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:layout_centerHorizontal="true"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp"/>
 
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/trophy"
-            android:layout_below="@id/tvRankingTitle"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"/>
 
         <ListView
             android:id="@+id/ranking_list_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/img"
+            android:layout_width="500dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="160dp"
             android:divider="@null"
             android:dividerHeight="0dp" />
 
@@ -50,7 +33,18 @@
             android:id="@+id/rank_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="우주선과의 전쟁 랭킹 보기" />
+            android:layout_marginLeft="580dp"
+            android:layout_marginTop="35dp"
+            android:fontFamily="@font/bmhannapro"
+            android:textSize="18dp"
+            android:text="" />
+        <View
+            android:id="@+id/overlay_home_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="780dp"
+            android:layout_marginTop="6dp"
+            android:background="@android:color/transparent" />
 
     </RelativeLayout>
 

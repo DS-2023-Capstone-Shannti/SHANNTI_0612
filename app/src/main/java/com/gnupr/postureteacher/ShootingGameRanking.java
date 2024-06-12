@@ -2,6 +2,7 @@ package com.gnupr.postureteacher;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
@@ -33,14 +34,24 @@ public class ShootingGameRanking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shooting_game_ranking);
 
+        View homeButtonOverlay = findViewById(R.id.overlay_home_button);
+        homeButtonOverlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShootingGameRanking.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         rankSwitch = findViewById(R.id.rank_switch);
         rankSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    navigateToActivity(ShootingGameRanking.class);
-                } else {
                     navigateToActivity(HeroGameRanking.class);
+                } else {
+                    navigateToActivity(ShootingGameRanking.class);
                 }
             }
         });

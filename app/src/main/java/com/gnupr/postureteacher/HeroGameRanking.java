@@ -3,6 +3,7 @@ package com.gnupr.postureteacher;
 
         import android.content.Intent;
         import android.os.Bundle;
+        import android.view.View;
         import android.widget.CompoundButton;
         import android.widget.ListView;
         import android.widget.Switch;
@@ -33,6 +34,16 @@ public class HeroGameRanking extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hero_game_ranking);
+
+        View homeButtonOverlay = findViewById(R.id.overlay_home_button);
+        homeButtonOverlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HeroGameRanking.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         rankSwitch = findViewById(R.id.rank_switch);
         rankSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
