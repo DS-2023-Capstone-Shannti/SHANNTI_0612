@@ -76,12 +76,17 @@ public class ShowExerciseActivity extends AppCompatActivity {
         View dialogView = inflater.inflate(R.layout.popup_exercise_level, null);
         builder.setView(dialogView);
 
-        dialogView.findViewById(R.id.level1).setOnClickListener(v -> setDifficultyAndDismissDialog("easy"));
-        dialogView.findViewById(R.id.level2).setOnClickListener(v -> setDifficultyAndDismissDialog("medium"));
-        dialogView.findViewById(R.id.level3).setOnClickListener(v -> setDifficultyAndDismissDialog("hard"));
+        // 난이도 버튼 리스너 설정
+        setDifficultyButtonListener(dialogView, R.id.level1, "easy");
+        setDifficultyButtonListener(dialogView, R.id.level2, "medium");
+        setDifficultyButtonListener(dialogView, R.id.level3, "hard");
 
         difficultyDialog = builder.create();
         difficultyDialog.show();
+    }
+
+    private void setDifficultyButtonListener(View dialogView, int buttonId, String difficulty) {
+        dialogView.findViewById(buttonId).setOnClickListener(v -> setDifficultyAndDismissDialog(difficulty));
     }
 
     private void setDifficultyAndDismissDialog(String difficulty) {

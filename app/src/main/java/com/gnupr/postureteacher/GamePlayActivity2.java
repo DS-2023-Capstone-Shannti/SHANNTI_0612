@@ -137,7 +137,7 @@ public class GamePlayActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_play);
+        setContentView(R.layout.activity_game_play2);
 
         // 게임 시작
         showPopup();
@@ -523,7 +523,7 @@ public class GamePlayActivity2 extends AppCompatActivity {
                         ImageView imageView = (ImageView) v;
                         if (imageView.getVisibility() == View.VISIBLE) {
                             score++;
-                            scoreTextView.setText("Score: " + score);
+                            scoreTextView.setText(score);
                             mediaPlayer1.start(); // 효과음 재생
                             hideMole(imageView);
                         }
@@ -562,7 +562,7 @@ public class GamePlayActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 score++; // 클릭 시 점수 증가
                 mediaPlayer1.start(); // 효과음 재생
-                scoreTextView.setText("Score: " + score);
+                scoreTextView.setText(score);
                 hideMole((ImageView) v);
             }
         });
