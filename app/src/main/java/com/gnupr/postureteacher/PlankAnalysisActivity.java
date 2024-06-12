@@ -10,6 +10,7 @@ import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
@@ -45,7 +46,10 @@ import java.util.Locale;
 import java.util.Map;
 
 
-public class PlankAnalysisActivity extends AppCompatActivity{
+public class PlankAnalysisActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
+    private TextToSpeech tts;
+    private static final long INITIAL_DELAY = 5000;
+
     private static final String TAG = "PlankAnalysisActivity";
     private static final String BINARY_GRAPH_NAME = "pose_tracking_gpu.binarypb";
     private static final String INPUT_VIDEO_STREAM_NAME = "input_video";
@@ -126,6 +130,18 @@ public class PlankAnalysisActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewLayoutResId());
+
+        // TTS 초기화
+        tts = new TextToSpeech(this, this);
+        timerTextView = findViewById(R.id.timer);
+        timerTextView.setText("자세 분석을 시작합니다");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                timerTextView.setText("분석 중.. 자세를 유지해 주세요!");
+            }
+        }, INITIAL_DELAY);
+
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -239,6 +255,23 @@ public class PlankAnalysisActivity extends AppCompatActivity{
     }
 
 
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int result = tts.setLanguage(Locale.KOREAN);
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "이 언어는 지원되지 않습니다.");
+            } else {
+                // TTS 출력
+                speak("자세 분석을 시작합니다");
+            }
+        } else {
+            Log.e("TTS", "초기화 실패");
+        }
+    }
+    private void speak(String text) {
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+    }
 
 
 
@@ -656,6 +689,11 @@ public class PlankAnalysisActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // TTS 리소스 해제
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
         if (converter != null) {
             converter.close();
         }

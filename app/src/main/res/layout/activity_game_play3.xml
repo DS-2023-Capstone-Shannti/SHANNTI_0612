@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginTop="-12dp"
-        android:layout_marginLeft="390dp"
+        android:layout_marginLeft="370dp"
         android:fontFamily="@font/bmhannapro"
         android:textColor="@color/black"
         android:text="60초"
