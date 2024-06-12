@@ -330,7 +330,7 @@ public class ShootingMainActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 1000);
     }
     private void endGame() {
-        super.onDestroy();
+
         gameRunning = false;
         Intent intent = new Intent(this, ShootingGameOver.class);
         intent.putExtra("collisionCount", collisionCount2); // Pass the collision count

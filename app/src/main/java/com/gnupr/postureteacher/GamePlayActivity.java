@@ -102,7 +102,7 @@ public class GamePlayActivity extends AppCompatActivity {
     private static final int SPEECH_REQUEST_CODE_DIARY = 1001;// You can choose any integer value
     private static final int SPEECH_REQUEST_CODE = 102; // You can choose any integer value
 
-//    private static final int GAME_DURATION = 60000; // 게임 시간 (밀리초 단위)
+//    private static final int GAME_DURATION = 10000; // 게임 시간 (밀리초 단위)
 
     private static final int GAME_DURATION = 60000; // 게임 시간 (밀리초 단위)
     private boolean gameRunning = false; // 게임이 실행 중인지 여부를 나타내는 플래그
@@ -302,34 +302,38 @@ public class GamePlayActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        gameEndHandler.removeCallbacks(gameEndRunnable);
         // 뒤로 가기 버튼이 눌렸을 때 게임을 종료
         gameRunning = false;
+        super.onDestroy();
         super.onBackPressed();
+        Intent intent = new Intent(this, GameStartActivity.class);
+        intent.putExtra("SCORE", score);
+        startActivity(intent);
+        finish();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        gameRunning = false;
-        gameEndHandler.removeCallbacks(gameEndRunnable);
-        // 액티비티가 일시 정지되면 타이머를 중지합니다.
-        gameTimer.cancel();
-        mediaPlayer2.pause();
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        gameRunning = false;
+//        gameEndHandler.removeCallbacks(gameEndRunnable);
+//        // 액티비티가 일시 정지되면 타이머를 중지합니다.
+//        gameTimer.cancel();
+//        mediaPlayer2.pause();
+//    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // 액티비티가 다시 시작되면 타이머를 재시작합니다.
-        gameTimer.start();
-        mediaPlayer2.start();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        // 액티비티가 다시 시작되면 타이머를 재시작합니다.
+//        gameTimer.start();
+//        mediaPlayer2.start();
+//    }
 
 
 
@@ -769,6 +773,8 @@ public class GamePlayActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        gameRunning = false;
+        gameTimer.cancel();
         if (mediaPlayer2 != null) {
             mediaPlayer2.release();
             mediaPlayer2 = null;
