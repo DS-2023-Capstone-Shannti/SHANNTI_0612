@@ -85,7 +85,7 @@ public class LungeActivity extends AppCompatActivity implements TextToSpeech.OnI
         System.loadLibrary("mediapipe_jni");
         System.loadLibrary("opencv_java3");
     }
-
+    private boolean isKneeAngleSatisfied = false;
     private SurfaceTexture previewFrameTexture;
     private SurfaceView previewDisplayView;
     private EglManager eglManager;
@@ -421,173 +421,161 @@ public class LungeActivity extends AppCompatActivity implements TextToSpeech.OnI
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     class ThreadClass extends Thread {
-        // TTS 출력 여부를 결정하는 변수
-        private boolean isTtsRequested = false;
+        // 이전 무릎 각도가 기준을 충족했는지 여부를 나타내는 변수
+        private boolean wasKneeAngleSatisfied = false;
+
+        // utteranceId 선언
+        private final String UTTERANCE_ID_COMPLETE = "utteranceComplete";
 
         @Override
         public void run() {
-            // 스레드 내부에서는 UI 업데이트를 직접 수행할 수 없으므로
-            // Activity의 runOnUiThread() 메소드를 사용하여 UI 업데이트를 수행합니다.
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    int countNumm = timeInSeconds/1000;
-                    Log.d("timeInSeconds",String.valueOf(timeInSeconds));
-                    UtteranceProgressListener listener = new UtteranceProgressListener() {
-                        @Override
-                        public void onStart(String utteranceId) {}
+            int totalCount = timeInSeconds / 1000;
 
+            UtteranceProgressListener listener = new UtteranceProgressListener() {
+                @Override
+                public void onStart(String utteranceId) {}
+
+                @Override
+                public void onDone(String utteranceId) {
+                    if (utteranceId.equals(UTTERANCE_ID_COMPLETE)) {
+                        Intent intent = new Intent(getApplicationContext(), ShowExerciseActivity.class);
+                        startActivity(intent);
+                        pauseTimerCheck = true;
+                        ui_HandlerCheck = false;
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onError(String utteranceId) {}
+            };
+            tts.setOnUtteranceProgressListener(listener);
+
+            //정상판별
+            if (wasKneeAngleSatisfied && !isKneeAngleSatisfied) {
+                countNum++;
+                tv_TimeCounter.setText(String.valueOf(countNum));
+                if (countNum == totalCount) {
+                    tts.speak("런지 횟수 " + countNum + "입니다. 운동을 종료합니다.", TextToSpeech.QUEUE_FLUSH, null, UTTERANCE_ID_COMPLETE);
+
+                    mFirebaseAuth = FirebaseAuth.getInstance();
+                    mDatabaseRef = FirebaseDatabase.getInstance().getReference("Shannti");
+
+                    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+                    mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDone(String utteranceId) {
-                            if (countNum >= countNumm) {
-                                Intent intent = new Intent(getApplicationContext(), ShowExerciseActivity.class);
-                                startActivity(intent);
-                                pauseTimerCheck = true;
-                                ui_HandlerCheck = false;
-                                finish();
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                // 현재 날짜 가져오기
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+                                String currentDate = sdf.format(new Date());
+
+                                // 날짜 경로 하위로 Time과 Kcal 데이터 가져오기
+                                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child(currentDate).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dateSnapshot) {
+                                        int newTime = 6;
+                                        int newKcal = 6;
+                                        int updatedTime = newTime;
+                                        int updatedKcal = newKcal;
+
+                                        if (dateSnapshot.exists()) {
+                                            Integer existingTime = dateSnapshot.child("Time").getValue(Integer.class);
+                                            Integer existingKcal = dateSnapshot.child("Kcal").getValue(Integer.class);
+
+                                            if (existingTime != null) {
+                                                updatedTime += existingTime;
+                                            }
+                                            if (existingKcal != null) {
+                                                updatedKcal += existingKcal;
+                                            }
+                                        }
+
+                                        Map<String, Object> updateData = new HashMap<>();
+                                        updateData.put("Time", updatedTime);
+                                        updateData.put("Kcal", updatedKcal);
+
+                                        mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child(currentDate).updateChildren(updateData)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        // 점수 업데이트가 성공적으로 완료됨을 알리는 메시지
+//                                                                                Toast.makeText(SquatActivity.this, "점수가 성공적으로 업데이트되었습니다. Time : " + updatedTime + ", Kcal : " + updatedKcal, Toast.LENGTH_SHORT).show();
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        // 점수 업데이트 실패 메시지
+//                                                                                Toast.makeText(L.this, "점수 업데이트에 실패했습니다: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        // 데이터베이스 오류 메시지
+//                                                                Toast.makeText(SquatActivity.this, "데이터베이스 오류: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                            } else {
+                                // 기존 점수가 없는 경우 새로운 점수 저장
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+                                String currentDate = sdf.format(new Date());
+
+                                Map<String, Object> newUserData = new HashMap<>();
+                                newUserData.put("Time", 6);
+                                newUserData.put("Kcal", 6);
+
+                                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child(currentDate).setValue(newUserData)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+//                                                                        Toast.makeText(SquatActivity.this, "새로운 점수가 성공적으로 저장되었습니다. Time : 6, Kcal : 6", Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                //  Toast.makeText(SquatActivity.this, "점수 저장에 실패했습니다: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
                             }
                         }
 
                         @Override
-                        public void onError(String utteranceId) {}
-                    };
-                    tts.setOnUtteranceProgressListener(listener);
-
-                    if (Arrays.stream(resultPosture).allMatch(x -> x == 2)) {
-                        if (!isTtsRequested) {
-                            isTtsRequested = true;
-                            Timer timer = new Timer();
-                            timer.schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    if (Arrays.stream(resultPosture).allMatch(x -> x == 2)) {
-                                        countNum += 1;
-                                        String utteranceId = Integer.toString(countNum);
-                                        tts.speak("런지 횟수 " + countNum + "입니다", TextToSpeech.QUEUE_FLUSH, null, utteranceId);
-                                        if (countNum >= countNumm) {
-                                            tts.speak("런지 횟수 " + countNum + "입니다. 운동을 종료합니다. ", TextToSpeech.QUEUE_FLUSH, null, utteranceId);
-
-                                            mFirebaseAuth = FirebaseAuth.getInstance();
-                                            mDatabaseRef = FirebaseDatabase.getInstance().getReference("Shannti");
-
-                                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-                                            mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    if (snapshot.exists()) {
-                                                        // 현재 날짜 가져오기
-                                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-                                                        String currentDate = sdf.format(new Date());
-
-                                                        // 날짜 경로 하위로 Time과 Kcal 데이터 가져오기
-                                                        mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child(currentDate).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                            @Override
-                                                            public void onDataChange(@NonNull DataSnapshot dateSnapshot) {
-                                                                int newTime = 6;
-                                                                int newKcal = 6;
-                                                                int updatedTime = newTime;
-                                                                int updatedKcal = newKcal;
-
-                                                                if (dateSnapshot.exists()) {
-                                                                    Integer existingTime = dateSnapshot.child("Time").getValue(Integer.class);
-                                                                    Integer existingKcal = dateSnapshot.child("Kcal").getValue(Integer.class);
-
-                                                                    if (existingTime != null) {
-                                                                        updatedTime += existingTime;
-                                                                    }
-                                                                    if (existingKcal != null) {
-                                                                        updatedKcal += existingKcal;
-                                                                    }
-                                                                }
-
-                                                                Map<String, Object> updateData = new HashMap<>();
-                                                                updateData.put("Time", updatedTime);
-                                                                updateData.put("Kcal", updatedKcal);
-
-                                                                mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child(currentDate).updateChildren(updateData)
-                                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                            @Override
-                                                                            public void onSuccess(Void aVoid) {
-                                                                                // 점수 업데이트가 성공적으로 완료됨을 알리는 메시지
-//                                                                                Toast.makeText(SquatActivity.this, "점수가 성공적으로 업데이트되었습니다. Time : " + updatedTime + ", Kcal : " + updatedKcal, Toast.LENGTH_SHORT).show();
-                                                                            }
-                                                                        })
-                                                                        .addOnFailureListener(new OnFailureListener() {
-                                                                            @Override
-                                                                            public void onFailure(@NonNull Exception e) {
-                                                                                // 점수 업데이트 실패 메시지
-//                                                                                Toast.makeText(L.this, "점수 업데이트에 실패했습니다: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                                            }
-                                                                        });
-                                                            }
-
-                                                            @Override
-                                                            public void onCancelled(@NonNull DatabaseError error) {
-                                                                // 데이터베이스 오류 메시지
-//                                                                Toast.makeText(SquatActivity.this, "데이터베이스 오류: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        });
-
-                                                    } else {
-                                                        // 기존 점수가 없는 경우 새로운 점수 저장
-                                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-                                                        String currentDate = sdf.format(new Date());
-
-                                                        Map<String, Object> newUserData = new HashMap<>();
-                                                        newUserData.put("Time", 6);
-                                                        newUserData.put("Kcal", 6);
-
-                                                        mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child(currentDate).setValue(newUserData)
-                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                    @Override
-                                                                    public void onSuccess(Void aVoid) {
-//                                                                        Toast.makeText(SquatActivity.this, "새로운 점수가 성공적으로 저장되었습니다. Time : 6, Kcal : 6", Toast.LENGTH_SHORT).show();
-                                                                    }
-                                                                })
-                                                                .addOnFailureListener(new OnFailureListener() {
-                                                                    @Override
-                                                                    public void onFailure(@NonNull Exception e) {
-                                                                      //  Toast.makeText(SquatActivity.this, "점수 저장에 실패했습니다: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                                    }
-                                                                });
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError error) {
-                                                //    Toast.makeText(SquatActivity.this, "데이터베이스 오류: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                                        }
-                                        isTtsRequested = false;
-                                    }
-                                }
-                            }, timeInSeconds);
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            //    Toast.makeText(SquatActivity.this, "데이터베이스 오류: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        isTtsRequested = false;
-                    }
-                    if (bodyMarkPoint[11].z > bodyMarkPoint[12].z)
-                        getLandmarksAngleResult(0);
-                        //왼쪽
-                    else
-                        getLandmarksAngleResult(1);
-                    //오른쪽
-
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                        startThreadCheck = true;
-                    }
-                    if(ui_HandlerCheck) {
-                        ui_Handler.post(this);
-                    }
+                    });
                 }
-            });
+                else {
+                    tts.speak("런지 횟수 " + countNum + "입니다", TextToSpeech.QUEUE_FLUSH, null, null);
+                }
+            }
+            // 이전 상태를 현재 상태로 업데이트
+            wasKneeAngleSatisfied = isKneeAngleSatisfied;
+
+            if (bodyMarkPoint[11].z > bodyMarkPoint[12].z)
+                getLandmarksAngleResult(0);
+                //왼쪽
+            else
+                getLandmarksAngleResult(1);
+            //오른쪽
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                startThreadCheck = true;
+            }
+            if (ui_HandlerCheck) {
+                ui_Handler.post(this);
+            }
         }
     }
+
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -822,7 +810,13 @@ public class LungeActivity extends AppCompatActivity implements TextToSpeech.OnI
             sideTotalResult[side] = true;
         else
             sideTotalResult[side] = false;
+        if (markResult[23 + side][25 + side][27 + side]) { // 무릎 각도가 기준을 충족하는지 확인
+            isKneeAngleSatisfied = true;
+        } else {
+            isKneeAngleSatisfied = false;
+        }
     }
+
 
     public static float getLandmarksAngleTwo(markPoint p1, markPoint p2, markPoint p3, char a, char b) {
         float p1_2 = 0f, p2_3 = 0f, p3_1 = 0f;

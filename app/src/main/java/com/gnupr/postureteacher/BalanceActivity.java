@@ -577,59 +577,32 @@ public class BalanceActivity extends AppCompatActivity implements TextToSpeech.O
     TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {
-            // 반복실행할 구문
+            // Increment global time
             globalTime++;
-            if(!pauseTimerCheck) {
-                // 0초 이상이면
-                if (timer_second != 0) {
-                    //1초씩 감소
+            if (!pauseTimerCheck) {
+                // Decrease timer_second if it is greater than 0
+                if (timer_second > 0) {
                     timer_second--;
-
-                    // 0분 이상이면
-                } else if (timer_minute != 0) {
-                    // 1분 = 60초
-                    timer_second = 60;
-                    timer_second--;
-                    timer_minute--;
-
-                    // 0시간 이상이면
-                } else if (timer_hour != 0) {
-                    // 1시간 = 60분
-                    timer_second = 60;
-                    timer_minute = 60;
-                    timer_second--;
-                    timer_minute--;
-                    timer_hour--;
                 }
 
-                //시, 분, 초가 10이하(한자리수) 라면
-                // 숫자 앞에 0을 붙인다 ( 8 -> 08 )
+                // Update text_second with leading zero if necessary
                 if (timer_second <= 9) {
                     text_second = "0" + timer_second;
                 } else {
                     text_second = Integer.toString(timer_second);
                 }
 
-                if (timer_minute <= 9) {
-                    text_minute = "0" + timer_minute;
-                } else {
-                    text_minute = Integer.toString(timer_minute);
-                }
-
-                if (timer_hour <= 9) {
-                    text_hour = "0" + timer_hour;
-                } else {
-                    text_hour = Integer.toString(timer_minute);
-                }
-                nowTime = text_hour + ":" + text_minute + ":" + text_second + " (" + spareTime + "%) ";
+                // Update the nowTime string
+                nowTime = "00:00:" + text_second + " (" + spareTime + "%) ";
             }
 
-            if (timer_hour == 0 && timer_minute == 0 && timer_second == 0) {
+            // If timer reaches 0 seconds
+            if (timer_second == 0) {
             /*timerTask.cancel();//타이머 종료
             timer.cancel();//타이머 종료
             timer.purge();//타이머 종료*/
                 //중간에 잠시 멈추는 건 타이머를 죽이는 게 아니라 타이머를 보기로만 잠시 멈춰두고 다시 시작할 때 시간을 새로 갱신
-                if(finalStopCheck == 0) {
+                if (finalStopCheck == 0) {
                     timer_second += 3;
                     finalStopCheck = 1;
                 }
@@ -662,7 +635,7 @@ public class BalanceActivity extends AppCompatActivity implements TextToSpeech.O
                 // 대화 상자가 null이 아니고, 표시되어 있을 경우에만 닫기
                 if (msgDlg != null && msgDlg.isShowing()) {
                     msgDlg.dismiss();
-                        tts.speak("밸런스를 시작합니다. 자세를" + timee + "초 유지하세요", TextToSpeech.QUEUE_FLUSH, null, null);
+                    tts.speak("밸런스를 시작합니다. 자세를" + timee + "초 유지하세요", TextToSpeech.QUEUE_FLUSH, null, null);
 
                     divideTime = UseTimerTimeDB.split(":");
                     timer_hour = Integer.parseInt(divideTime[0]);
@@ -975,9 +948,9 @@ public class BalanceActivity extends AppCompatActivity implements TextToSpeech.O
 
     public void getTimeIntent() {
         Intent intent = getIntent();
-        int intentHour = intent.getIntExtra("hour", 1);
-        int intentMinute = intent.getIntExtra("minute", 0);
-        UseTimerTimeDB = intentHour + ":" + intentMinute + ":00";
+        int intentSecond = intent.getIntExtra("second", 20); // Changed to get seconds from intent
+        timer_second = intentSecond;
+        UseTimerTimeDB = "00:00:" + (timer_second <= 9 ? "0" + timer_second : timer_second);
     }
 
     //pose
