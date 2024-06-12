@@ -67,7 +67,7 @@ public class GameFinishActivity extends AppCompatActivity {
 //        Intent calendarIntent = new Intent(this, Empty.class);
 //        calendarIntent.putExtra("SCORE1", score);
 
-        if (score*10 >= 80) {
+        if (score*10 >= 70) {
             star1.setImageResource(R.drawable.star_yellow);
             star2.setImageResource(R.drawable.star_yellow);
             star3.setImageResource(R.drawable.star_yellow);

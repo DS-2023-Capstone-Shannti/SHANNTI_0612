@@ -989,7 +989,7 @@ public class GamePlayActivity2 extends AppCompatActivity {
                 switch (missionIndex) {
                     case 0: // Squat
                         countNum++;
-                        count.setText("스쿼트 " + countNum + "회");
+                        count.setText(countNum + "회");
                         mission.setText("스쿼트 5회");
                         if (countNum == 5) {
                             completeMission();
@@ -998,7 +998,7 @@ public class GamePlayActivity2 extends AppCompatActivity {
 
                     case 1: // Lunge
                         countNum++;
-                        count.setText("런지 " + countNum + "회");
+                        count.setText(countNum + "회");
                         mission.setText("런지 5회");
                         if (countNum == 5) {
                             completeMission();
@@ -1069,11 +1069,11 @@ public class GamePlayActivity2 extends AppCompatActivity {
         switch (missionIndex) {
             case 0:
                 mission.setText("스쿼트 5회");
-                count.setText("스쿼트 0회");
+                count.setText("0회");
                 break;
             case 1:
                 mission.setText("런지 5회");
-                count.setText("런지 0회");
+                count.setText("0회");
                 break;
             case 2:
                 mission.setText("밸런스 10초");
@@ -1088,7 +1088,7 @@ public class GamePlayActivity2 extends AppCompatActivity {
         isBalanceCountdownRunning = true;
         new CountDownTimer(10000, 1000) {
             public void onTick(long millisUntilFinished) {
-                count.setText("남은 시간: " + millisUntilFinished / 1000 + "초");
+                count.setText(millisUntilFinished / 1000 + "초");
             }
 
             public void onFinish() {

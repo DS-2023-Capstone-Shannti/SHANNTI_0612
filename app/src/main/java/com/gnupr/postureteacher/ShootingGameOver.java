@@ -56,7 +56,7 @@ public class ShootingGameOver extends AppCompatActivity {
         collisionCount = intent.getIntExtra("collisionCount", 0); // Default to 0 if not found
 
         // Use the collisionCount value as needed in your activity
-        tvPoints.setText("Collision Count: " + collisionCount);
+        tvPoints.setText(String.valueOf(collisionCount));
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Shannti");

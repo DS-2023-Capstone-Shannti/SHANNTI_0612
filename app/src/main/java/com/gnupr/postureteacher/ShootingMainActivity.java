@@ -261,6 +261,9 @@ public class ShootingMainActivity extends AppCompatActivity {
     private void startCountDown() {
         count.setText(String.valueOf(countDownValue));
 
+        final ImageView startImage = findViewById(R.id.startImage);
+        startImage.setVisibility(View.INVISIBLE);
+
         if (countDownValue > 0) {
             // 카운트 다운이 끝날 때까지 숫자를 하나씩 줄이면서 다음 숫자를 표시
             final int imageResource = getResources().getIdentifier("count" + countDownValue, "drawable", getPackageName());
@@ -273,11 +276,10 @@ public class ShootingMainActivity extends AppCompatActivity {
                 public void run() {
                     startCountDown();
                 }
-            }, 1000); // 1초 딜레이
+            }, 1500); // 1초 딜레이
         } else {
             // 카운트 다운이 완료되면 텍스트뷰를 숨기고 게임 시작 이미지를 표시
             count.setVisibility(View.INVISIBLE);
-            final ImageView startImage = findViewById(R.id.startImage);
             startImage.setVisibility(View.VISIBLE);
 
             new Handler().postDelayed(new Runnable() {
@@ -328,6 +330,7 @@ public class ShootingMainActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 1000);
     }
     private void endGame() {
+        super.onDestroy();
         gameRunning = false;
         Intent intent = new Intent(this, ShootingGameOver.class);
         intent.putExtra("collisionCount", collisionCount2); // Pass the collision count
