@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/squat_fragment"
+        android:enabled="true"
+        android:title="스쿼트"/>
+    <item
+        android:id="@+id/plank_fragment"
+        android:enabled="true"
+        android:title="플랭크"/>
+    <item
+        android:id="@+id/lunge_fragment"
+        android:enabled="true"
+        android:title="런지"/>
+    <item
+        android:id="@+id/balance_fragment"
+        android:enabled="true"
+        android:title="밸런스"/>
+    <item
+        android:id="@+id/static_fragment"
+        android:enabled="true"
+        android:title="운동 기록"/>
+</menu>

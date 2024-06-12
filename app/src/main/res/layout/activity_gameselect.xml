@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="846dp"
+    android:layout_height="411dp"
+    tools:context=".GameStartActivity"
+    app:srcCompat="@drawable/start_game"
+    android:screenOrientation="landscape">
+
+    <RelativeLayout
+        android:id="@+id/android_game_start"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/gameselect"
+        android:clipToOutline="true"
+        tools:ignore="MissingConstraints,RedundantNamespace,UnusedAttribute"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <View
+            android:id="@+id/overlay_home_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:onClick="onHomeButton"
+            android:layout_marginLeft="780dp"
+            android:layout_marginTop="15dp" />
+
+        <View
+            android:id="@+id/btn_molegame"
+            android:layout_width="158dp"
+            android:layout_height="58dp"
+            android:background="@android:color/transparent"
+            android:onClick="onmoleButtonClick"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="310dp"/>
+
+        <View
+            android:id="@+id/btn_shootinggame"
+            android:layout_width="158dp"
+            android:layout_height="58dp"
+            android:layout_marginLeft="580dp"
+            android:layout_marginTop="310dp"
+            android:background="@android:color/transparent"
+            android:onClick="onshootButtonClick"/>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

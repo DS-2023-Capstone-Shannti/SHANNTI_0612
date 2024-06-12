@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/shooting_background">
+
+    <LinearLayout
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/scoreTextView"
+            android:background="@drawable/clock" />
+
+
+        <TextView
+            android:id="@+id/Time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="-40dp"
+            android:layout_toLeftOf="@id/scoreTextView"
+            android:text="시간 "
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ShotTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@id/scoreTextView"
+            android:text="Hit"
+            android:textSize="28dp"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:id="@+id/layout_hearts"
+            android:layout_width="135dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="18dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/heart1"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:src="@drawable/life" />
+
+            <ImageView
+                android:id="@+id/heart2"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:src="@drawable/life" />
+
+            <ImageView
+                android:id="@+id/heart3"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:src="@drawable/life" />
+
+            <ImageView
+                android:id="@+id/heart4"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:src="@drawable/life" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="53dp"
+            android:layout_marginTop="3dp">
+
+            <ImageView
+                android:id="@+id/fire"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/fire" />
+        </LinearLayout>
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="175dp"
+            android:layout_height="160dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/measure_camera_bg" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/startImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="80dp"
+            android:src="@drawable/gamestart" />
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="140dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="80dp"
+            android:text="게임 스타트"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/rocket2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rocket2"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:id="@+id/redBall"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/rocket1"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:id="@+id/redshot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shot"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:id="@+id/lifeItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/life" />
+
+
+    </RelativeLayout>
+</LinearLayout>

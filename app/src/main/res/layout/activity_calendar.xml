@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="846dp"
+    android:layout_height="411dp"
+    tools:context=".MainActivity"
+    app:srcCompat="@drawable/calendar_page"
+    android:screenOrientation="landscape">
+
+    <RelativeLayout
+        android:id="@+id/android_calendar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/calendar_page"
+        android:clipToOutline="true"
+        tools:ignore="MissingConstraints,RedundantNamespace,UnusedAttribute"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <View
+            android:id="@+id/overlay_home_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="775dp"
+            android:layout_marginTop="6dp"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:id="@+id/trophy"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="277dp"
+            android:layout_marginTop="305dp"
+            app:srcCompat="@drawable/trophy"
+            ></ImageView>
+
+        <TextView
+            android:id="@+id/exercise_time"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:textColor="@color/chart_color"
+            android:textSize="15sp"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="326dp"
+            android:textStyle="bold"
+            android:text=""/>
+        <TextView
+            android:id="@+id/exercise_kcal"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:textColor="@color/chart_color"
+            android:textSize="15sp"
+            android:layout_marginLeft="185dp"
+            android:layout_marginTop="326dp"
+            android:textStyle="bold"
+            android:text=""/>
+        <TextView
+            android:id="@+id/exercise_score"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:textColor="@color/chart_color"
+            android:textSize="15sp"
+            android:layout_marginLeft="297dp"
+            android:layout_marginTop="326dp"
+            android:textStyle="bold"
+            android:text=""/>
+        <ProgressBar
+            android:id="@+id/Prog_time"
+            android:layout_marginTop="65dp"
+            android:layout_marginLeft="105dp"
+            android:layout_width="190dp"
+            android:layout_height="190dp"
+            android:indeterminateOnly="false"
+            tools:progress="1"
+            android:layout_gravity="center_horizontal"
+            android:progressDrawable="@drawable/circle_time"
+            android:progress="75">
+        </ProgressBar>
+        <ProgressBar
+            android:id="@+id/Prog_kcal"
+            android:layout_marginTop="45dp"
+            android:layout_marginLeft="85dp"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:indeterminateOnly="false"
+            tools:progress="1"
+            android:layout_gravity="center_horizontal"
+            android:progressDrawable="@drawable/circle_kcal"
+            android:progress="75">
+        </ProgressBar>
+        <ProgressBar
+            android:id="@+id/Prog_score"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="60dp"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:indeterminateOnly="false"
+            tools:progress="1"
+            android:layout_gravity="center_horizontal"
+            android:progressDrawable="@drawable/circle_score"
+            android:max="100">
+        </ProgressBar>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/squatchart"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="480dp"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/squatText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="440dp"
+            android:layout_marginTop="70dp"
+            android:text="Squat"
+            android:fontFamily="@font/font"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/lungechart"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="115dp"
+            android:layout_marginLeft="480dp" />
+        <TextView
+            android:id="@+id/lungeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="440dp"
+            android:layout_marginTop="170dp"
+            android:text="Lunge"
+            android:fontFamily="@font/font"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/plankchart"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="215dp"
+            android:layout_marginLeft="480dp"/>
+        <TextView
+            android:id="@+id/plankText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="440dp"
+            android:layout_marginTop="270dp"
+            android:text="Plank"
+            android:fontFamily="@font/font"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/balancechart"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="315dp"
+            android:layout_marginLeft="480dp"/>
+        <TextView
+            android:id="@+id/balanceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="430dp"
+            android:layout_marginTop="370dp"
+            android:text="Balance"
+            android:fontFamily="@font/font"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

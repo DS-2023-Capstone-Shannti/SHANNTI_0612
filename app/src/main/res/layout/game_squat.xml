@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/exercise_background">
+
+    <RelativeLayout
+        android:id="@+id/plank_back"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/exercise_background"
+        android:clipToOutline="true"
+        tools:ignore="MissingConstraints,RedundantNamespace,UnusedAttribute"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+        <View
+            android:id="@+id/exit_button"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="715dp"
+            android:layout_marginTop="335dp"
+            android:letterSpacing="0.02"
+            android:background="@android:color/transparent"
+            android:onClick="onClickExit"/>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="722dp"
+        android:layout_height="361dp"
+        android:layout_marginRight="90dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/back_ground">
+
+
+        <FrameLayout
+            android:id="@+id/preview_display_layout"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center" >
+
+            </FrameLayout>
+
+            <View
+                android:id="@+id/camera_bg_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/measure_camera_bg" />
+
+            <TextView
+                android:id="@+id/no_camera_access_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00FFFFFF"
+                android:gravity="center"
+                android:text="@string/no_camera_access"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/game_message"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:fontFamily="@font/font"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:text="스쿼트 5번 하세요"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/exit_button111"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:letterSpacing="0.02"
+            android:text=""
+            android:textColor="#F8F6F4"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

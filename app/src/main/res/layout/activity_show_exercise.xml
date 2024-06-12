@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="846dp"
+    android:layout_height="411dp"
+    tools:context=".MainActivity"
+    app:srcCompat="@drawable/show_exercise">
+
+    <RelativeLayout
+        android:id="@+id/android_exercise"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/show_exercise"
+        android:clipToOutline="true"
+        tools:ignore="MissingConstraints,RedundantNamespace,UnusedAttribute"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <View
+            android:id="@+id/reset_difficulty_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="775dp"
+            android:layout_marginTop="56dp"
+            android:background="@android:color/transparent" />
+
+        <View
+            android:id="@+id/overlay_home_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="775dp"
+            android:layout_marginTop="6dp"
+            android:background="@android:color/transparent" />
+
+
+        <ImageView
+            android:id="@+id/squat_icon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="38dp"
+            android:layout_marginTop="184dp"
+            app:srcCompat="@drawable/squat">
+        </ImageView>
+        <ImageView
+            android:id="@+id/lunge_icon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="38dp"
+            android:layout_marginTop="270dp"
+            app:srcCompat="@drawable/lunges">
+        </ImageView>
+        <ImageView
+            android:id="@+id/plank_icon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="430dp"
+            android:layout_marginTop="184dp"
+            app:srcCompat="@drawable/plank">
+        </ImageView>
+        <ImageView
+            android:id="@+id/balance_icon"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="430dp"
+            android:layout_marginTop="275dp"
+            app:srcCompat="@drawable/balance2">
+        </ImageView>
+
+
+        <View
+            android:id="@+id/overlay_squat"
+            android:layout_width="65dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="355dp"
+            android:layout_marginTop="184dp"
+            android:background="@android:color/transparent" />
+        <View
+            android:id="@+id/overlay_lunge"
+            android:layout_width="65dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="355dp"
+            android:layout_marginTop="270dp"
+            android:background="@android:color/transparent" />
+        <View
+            android:id="@+id/overlay_balance"
+            android:layout_width="65dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="750dp"
+            android:layout_marginTop="270dp"
+            android:background="@android:color/transparent" />
+        <View
+            android:id="@+id/overlay_plank"
+            android:layout_width="65dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="750dp"
+            android:layout_marginTop="184dp"
+            android:background="@android:color/transparent" />
+
+
+
+        <View
+            android:id="@+id/overlay_squat1"
+            android:layout_width="65dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="290dp"
+            android:layout_marginTop="184dp"
+            android:background="@android:color/transparent" />
+        <View
+            android:id="@+id/overlay_lunge1"
+            android:layout_width="65dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="290dp"
+            android:layout_marginTop="270dp"
+            android:background="@android:color/transparent" />
+        <View
+            android:id="@+id/overlay_balance1"
+            android:layout_width="65dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="685dp"
+            android:layout_marginTop="270dp"
+            android:background="@android:color/transparent" />
+        <View
+            android:id="@+id/overlay_plank1"
+            android:layout_width="65dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="685dp"
+            android:layout_marginTop="184dp"
+            android:background="@android:color/transparent" />
+
+
+
+    </RelativeLayout>
+    <!-- 벡터 그래픽을 덮는 투명한 View -->
+</androidx.constraintlayout.widget.ConstraintLayout>

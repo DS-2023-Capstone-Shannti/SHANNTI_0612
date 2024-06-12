@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        tools:context=".MainActivity2">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="400dp"
+            android:backgroundTint="#70E8F3DB"
+            app:cardElevation="2dp"
+            android:layout_marginTop="40dp"
+            app:cardCornerRadius="25dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오늘의 기록"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtTotalCalories"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:text="Total Calories: "
+                android:textStyle="bold"
+                android:layout_marginTop="100dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/txtTotalTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Time: "
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginTop="80dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/txtper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0%"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="240dp"
+                android:textSize="16dp"/>
+
+            <ProgressBar
+                android:id="@+id/Prog"
+                android:layout_marginTop="160dp"
+                android:layout_width="190dp"
+                android:layout_height="190dp"
+                android:indeterminateOnly="false"
+                tools:progress="1"
+                android:layout_gravity="center_horizontal"
+                android:progressDrawable="@drawable/circle_time"
+                android:progress="75">
+            </ProgressBar>
+            <ProgressBar
+                android:id="@+id/Prog2"
+                android:layout_marginTop="140dp"
+                android:layout_width="230dp"
+                android:layout_height="230dp"
+                android:indeterminateOnly="false"
+                tools:progress="1"
+                android:layout_gravity="center_horizontal"
+                android:progressDrawable="@drawable/circle_time"
+                android:progress="75">
+            </ProgressBar>
+            <ProgressBar
+                android:id="@+id/Prog3"
+                android:layout_marginTop="115dp"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
+                android:indeterminateOnly="false"
+                tools:progress="1"
+                android:layout_gravity="center_horizontal"
+                android:progressDrawable="@drawable/circle_time"
+                android:progress="75">
+            </ProgressBar>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 나머지 요소들도 동일하게 유지됩니다. -->
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/squatchart"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/plankchart"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/lungechart"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/balancechart"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mainpage"
+            android:layout_width="300dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="35dp"
+            android:backgroundTint="#95468548"
+            android:inputType="textCapSentences"
+            android:elevation="10dp"
+            android:padding="10dp"
+            android:text="메인페이지"
+            android:shadowColor="#7061D7"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</ScrollView>

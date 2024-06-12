@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "547055148916",
+    "project_id": "shantipose",
+    "storage_bucket": "shantipose.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547055148916:android:76675d1850058997985621",
+        "android_client_info": {
+          "package_name": "com.gnupr.postureteacher"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbStBV0HOcFtP1d1HSJHIxO-o_4UftLIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

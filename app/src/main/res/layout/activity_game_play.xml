@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gameback"
+    tools:context=".GamePlayActivity"
+    android:screenOrientation="landscape">
+
+    <TextView
+        android:id="@+id/timeLeftTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="-12dp"
+        android:layout_marginLeft="390dp"
+        android:fontFamily="@font/bmhannapro"
+        android:textColor="@color/black"
+        android:text="60초"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/scoreTextView"
+        android:layout_width="50dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="410dp"
+        android:fontFamily="@font/bmhannapro"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/mainPageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="250dp"
+        android:layout_toRightOf="@id/scoreTextView"
+        android:background="@drawable/blue2" />
+
+    <LinearLayout
+        android:id="@+id/moleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/scoreTextView"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView_00"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginRight="80dp"
+                android:clickable="true"
+                android:onClick="onMoleClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/moledown" />
+
+            <ImageView
+                android:id="@+id/imageView_01"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:clickable="true"
+                android:onClick="onMoleClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/moledown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView_02"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginRight="80dp"
+                android:clickable="true"
+                android:onClick="onMoleClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/moledown" />
+
+            <ImageView
+                android:id="@+id/imageView_10"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginRight="80dp"
+                android:clickable="true"
+                android:onClick="onMoleClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/moledown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView_11"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:clickable="true"
+                android:onClick="onMoleClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/moledown" />
+
+            <ImageView
+                android:id="@+id/imageView_12"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:clickable="true"
+                android:onClick="onMoleClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/moleup" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/redBall"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/red_ball"
+        android:contentDescription="@null" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="160dp"
+        android:layout_marginBottom="15dp">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.camera.view.PreviewView>
+        <TextView
+            android:id="@+id/mission"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textStyle="bold"
+            android:text="mission"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Count"
+            android:textStyle="bold"
+            android:textSize="40dp" />
+    </FrameLayout>
+
+</RelativeLayout>

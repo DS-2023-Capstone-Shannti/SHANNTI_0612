@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="846dp"
+    android:layout_height="411dp"
+    tools:context=".LoginActivity"
+    app:srcCompat="@drawable/face_register"
+    android:screenOrientation="landscape">
+
+    <RelativeLayout
+        android:id="@+id/android_main"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/face_register"
+        android:clipToOutline="true"
+        tools:ignore="MissingConstraints,RedundantNamespace,UnusedAttribute"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="297dp"
+        android:layout_height="279dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintVertical_bias="0.060000002">
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="68dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="229dp"
+            android:layout_marginEnd="229dp"
+            android:layout_marginRight ="229dp"
+            android:background="@drawable/cam"
+            android:backgroundTint="@color/teal_200"
+            android:elevation="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_conversion_absoluteHeight="63dp"
+            tools:layout_conversion_absoluteWidth="62dp" />
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.camera.view.PreviewView>
+    </FrameLayout>
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="247dp"
+            android:layout_height="247dp"
+            android:layout_marginLeft="490dp"
+            android:layout_marginTop="60dp"
+            android:background="#2C7E57C2"
+            android:elevation="1dp"
+            app:layout_constraintVertical_bias="0.439"
+            tools:srcCompat="@android:drawable/screen_background_light_transparent" />
+
+        <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/container">
+
+
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/imageView"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_alignEnd="@+id/imageView"
+            android:layout_marginStart="43dp"
+            android:layout_marginLeft="525dp"
+            android:layout_marginTop="110dp"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/bmhannapro"
+            android:hint="등록할 얼굴"
+            android:textAlignment="center"
+            android:textColor="@color/main_color"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintVertical_bias="0.479" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="164dp"
+            android:layout_height="180dp"
+            android:layout_alignBottom="@+id/textView"
+            android:layout_marginLeft="525dp"
+            android:layout_marginBottom="-61dp"
+            android:fontFamily="@font/bmhannapro"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintVertical_bias="0.914" />
+
+        <TextView
+        android:id="@+id/textAbovePreview"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:fontFamily="@font/bmhannapro"
+        android:layout_marginLeft="470dp"
+        android:layout_marginTop="330dp"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="330dp"
+            android:background="@android:color/transparent" />
+
+        <View
+            android:id="@+id/imageButton"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="730dp"
+            android:layout_marginTop="300dp"
+            android:background="@android:color/transparent" />
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

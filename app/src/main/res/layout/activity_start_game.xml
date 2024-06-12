@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="846dp"
+    android:layout_height="411dp"
+    tools:context=".GameStartActivity"
+    app:srcCompat="@drawable/start_game"
+    android:screenOrientation="landscape">
+
+    <RelativeLayout
+        android:id="@+id/android_game_start"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/start_game"
+        android:clipToOutline="true"
+        tools:ignore="MissingConstraints,RedundantNamespace,UnusedAttribute"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <ImageView
+            android:id="@+id/game_logo"
+            android:layout_width="477dp"
+            android:layout_height="302dp"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="0dp"
+            app:srcCompat="@drawable/game_logo">
+
+        </ImageView>
+
+        <View
+            android:id="@+id/overlay_home_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="775dp"
+            android:layout_marginTop="6dp"
+            android:background="@android:color/transparent"
+            android:onClick="onHomeButton" />
+
+        <View
+            android:id="@+id/overlay_level1"
+            android:layout_width="158dp"
+            android:layout_height="58dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="310dp"
+            android:background="@android:color/transparent"
+            android:onClick="onEasyButtonClick"/>
+        <View
+            android:id="@+id/overlay_level2"
+            android:layout_width="158dp"
+            android:layout_height="58dp"
+            android:layout_marginLeft="350dp"
+            android:layout_marginTop="310dp"
+            android:background="@android:color/transparent"
+            android:onClick="onMediumButtonClick"/>
+        <View
+            android:id="@+id/overlay_level3"
+            android:layout_width="158dp"
+            android:layout_height="58dp"
+            android:layout_marginLeft="552dp"
+            android:layout_marginTop="310dp"
+            android:background="@android:color/transparent"
+            android:onClick="onHardButtonClick"/>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

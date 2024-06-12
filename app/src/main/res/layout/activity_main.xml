@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="846dp"
+    android:layout_height="411dp"
+    tools:context=".MainActivity"
+    app:srcCompat="@drawable/main_page"
+    android:screenOrientation="landscape">
+
+    <RelativeLayout
+        android:id="@+id/android_main"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/main_page"
+        android:clipToOutline="true"
+        tools:ignore="MissingConstraints,RedundantNamespace,UnusedAttribute"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:gravity="left"
+            android:paddingBottom="16dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/bmhannapro"
+            android:textSize="25sp"
+            android:layout_marginLeft="115dp"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:text=""/>
+        <TextView
+            android:id="@+id/today_date"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:textColor="@color/date_color"
+            android:textSize="23sp"
+            android:fontFamily="@font/bmhannapro"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"
+            android:text=""/>
+
+        <ImageView
+            android:id="@+id/girl2"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="550dp"
+            android:layout_marginTop="70dp"
+            app:srcCompat="@drawable/girl2"
+            ></ImageView>
+
+        <View
+            android:id="@+id/overlay_home"
+            android:layout_width="58dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="320dp"
+            android:background="@android:color/transparent" />
+
+        <View
+            android:id="@+id/overlay_exercise"
+            android:layout_width="58dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="320dp"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:id="@+id/overlay_game"
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:layout_marginLeft="248dp"
+            android:layout_marginTop="335dp"
+            app:srcCompat="@drawable/console"></ImageView>
+
+        <ImageView
+            android:id="@+id/overlay_rank"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="550dp"
+            android:layout_marginTop="340dp"
+            app:srcCompat="@drawable/trophy_main">
+        </ImageView>
+
+        <View
+            android:id="@+id/overlay_chart"
+            android:layout_width="58dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="700dp"
+            android:layout_marginTop="320dp"
+            android:background="@android:color/transparent" />
+
+        <View
+            android:id="@+id/overlay_logout"
+            android:layout_width="58dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="390dp"
+            android:layout_marginTop="300dp"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:id="@+id/main_time"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:textColor="@color/main_page_color"
+            android:textSize="13sp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="190dp"
+            android:textStyle="bold"
+            android:text=""/>
+        <TextView
+            android:id="@+id/main_kcal"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:textColor="@color/main_page_color"
+            android:textSize="13sp"
+            android:layout_marginLeft="250dp"
+            android:layout_marginTop="190dp"
+            android:textStyle="bold"
+            android:text=""/>
+        <TextView
+            android:id="@+id/main_score"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:textColor="@color/main_page_color"
+            android:textSize="13sp"
+            android:layout_marginLeft="355dp"
+            android:layout_marginTop="190dp"
+            android:textStyle="bold"
+            android:text=""/>
+        <TextView
+            android:id="@+id/main_score2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:textColor="@color/main_page_color"
+            android:textSize="13sp"
+            android:layout_marginLeft="450dp"
+            android:layout_marginTop="190dp"
+            android:textStyle="bold"
+            android:text=""/>
+
+
+    </RelativeLayout>
+
+    <!-- 벡터 그래픽을 덮는 투명한 View -->
+</androidx.constraintlayout.widget.ConstraintLayout>

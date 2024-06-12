@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="846dp"
+    android:layout_height="411dp"
+    tools:context=".MainActivity"
+    app:srcCompat="@drawable/main_page"
+    android:screenOrientation="landscape">
+
+    <RelativeLayout
+        android:id="@+id/android_exercise_finish"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/finish_exercise"
+        android:clipToOutline="true"
+        tools:ignore="MissingConstraints,RedundantNamespace,UnusedAttribute"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+        <View
+            android:id="@+id/overlay_home"
+            android:layout_width="58dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="320dp"
+            android:background="@android:color/transparent" />
+
+        <View
+            android:id="@+id/overlay_exercise"
+            android:layout_width="58dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="240dp"
+            android:layout_marginTop="320dp"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:id="@+id/overlay_game"
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:layout_marginLeft="560dp"
+            android:layout_marginTop="330dp"
+            app:srcCompat="@drawable/console"></ImageView>
+
+        <View
+            android:id="@+id/overlay_chart"
+            android:layout_width="58dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="700dp"
+            android:layout_marginTop="320dp"
+            android:background="@android:color/transparent" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

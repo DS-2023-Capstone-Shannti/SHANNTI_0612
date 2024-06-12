@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/android_lar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/register"
+        android:clipToOutline="true"
+        tools:ignore="MissingConstraints,RedundantNamespace,UnusedAttribute"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <EditText
+            android:id="@+id/Edt_email"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="230dp"
+            android:layout_marginTop="85dp"
+            android:fontFamily="@font/bmhannapro"
+            android:textSize="13dp"
+            android:hint="이메일"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textColorHint="@android:color/transparent"/>
+
+        <EditText
+            android:id="@+id/Edt_password"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:textSize="13dp"
+            android:layout_marginLeft="230dp"
+            android:layout_marginTop="148dp"
+            android:fontFamily="@font/bmhannapro"
+            android:hint="비밀번호"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textColorHint="@android:color/transparent" />
+
+        <EditText
+            android:id="@+id/Edt_studentID"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:textSize="13dp"
+            android:layout_marginLeft="230dp"
+            android:layout_marginTop="210dp"
+            android:fontFamily="@font/bmhannapro"
+            android:hint="학번"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textColorHint="@android:color/transparent" />
+
+        <EditText
+            android:id="@+id/Edt_phone"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:textSize="13dp"
+            android:layout_marginLeft="230dp"
+            android:layout_marginTop="272dp"
+            android:fontFamily="@font/bmhannapro"
+            android:hint="전화번호"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textColorHint="@android:color/transparent" />
+
+        <Button
+            android:id="@+id/Btn_signup"
+            android:layout_width="360dp"
+            android:layout_height="33dp"
+            android:layout_marginLeft="230dp"
+            android:layout_marginTop="320dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/bmhannapro"
+            android:padding="10dp"
+            android:text="Register"
+            android:textColor="#ffffff"
+            android:textSize="7sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/overlay_login"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="445dp"
+            android:layout_marginTop="365dp"
+            android:background="@android:color/transparent" />
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

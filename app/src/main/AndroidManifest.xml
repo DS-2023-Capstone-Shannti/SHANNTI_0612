@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-sdk android:targetSdkVersion="31" />
+    <!-- For using the camera -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- For MediaPipe -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
+    <application
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:label="SHANNTI"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PostureTeacher">
+
+
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="landscape"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SquatActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.MeasureActivity" />
+        <activity
+            android:name=".PlankActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.MeasureActivity" />
+        <activity
+            android:name=".LungeActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.MeasureActivity" />
+        <activity
+            android:name=".BalanceActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.MeasureActivity" />
+
+        <!--////////////////////////////////////////////////////////////////////////////////////////////-->
+        <activity android:name=".MainActivity"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name=".ShowExerciseActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".FinishExerciseActivity"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name=".CalendarActivity"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name=".GameStartActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".GamePlayActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".GamePlayActivity2"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".GamePlayActivity3"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".GameFinishActivity"
+            android:screenOrientation="landscape"/>
+
+
+        <activity android:name=".GameSquat"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".GameBalance"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".GameLunge"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name=".Login"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".LogoutActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".Signup"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name=".SquatAnalysisActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".LungeAnalysisActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".PlankAnalysisActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".BalanceAnalysisActivity"
+            android:screenOrientation="landscape"></activity>
+
+        <activity android:name=".ShootingMainActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".ShootingGameOver"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".ShootingGameRanking"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".HeroGameRanking"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".MainRankingActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".RankingAdapter"></activity>
+        <activity android:name=".GameselectActivity"
+            android:screenOrientation="landscape"></activity>
+    </application>
+
+</manifest>

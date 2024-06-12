@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="846dp"
+    android:layout_height="411dp"
+    tools:context=".LoginActivity"
+    app:srcCompat="@drawable/hero_ranking_background"
+    android:screenOrientation="landscape">
+
+    <RelativeLayout
+        android:id="@+id/android_main"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/hero_ranking_background"
+        android:clipToOutline="true"
+        tools:ignore="MissingConstraints,RedundantNamespace,UnusedAttribute"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/tvRankingTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_centerHorizontal="true"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"/>
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/trophy"
+            android:layout_below="@id/tvRankingTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"/>
+
+        <ListView
+            android:id="@+id/ranking_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/img"
+            android:divider="@null"
+            android:dividerHeight="0dp" />
+
+        <Switch
+            android:id="@+id/rank_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="우주선과의 전쟁 랭킹 보기" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
