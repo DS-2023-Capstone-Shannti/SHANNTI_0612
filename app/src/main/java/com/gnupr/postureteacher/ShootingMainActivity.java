@@ -970,7 +970,7 @@ public class ShootingMainActivity extends AppCompatActivity {
         Log.d(TAG, "Face Center Y: " + faceCenterY);
 
         if (faceCenterX < imageViewWidth / 2) { // 얼굴이 왼쪽에 있는 경우
-            if (faceCenterY < 130) { // 얼굴이 위에 있는 경우
+            if (faceCenterY < 150) { // 얼굴이 위에 있는 경우
                 moveRight = false; // 왼쪽 방향으로 설정
                 redBall.setScaleX(1); // 이미지를 원래 방향으로
             } else { // 얼굴이 아래에 있는 경우
@@ -980,7 +980,7 @@ public class ShootingMainActivity extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), "스쿼트 1회!", Toast.LENGTH_SHORT).show();
             }
         } else { // 얼굴이 오른쪽에 있는 경우
-            if (faceCenterY < 130) { // 얼굴이 위에 있는 경우
+            if (faceCenterY < 150) { // 얼굴이 위에 있는 경우
                 moveRight = true; // 오른쪽 방향으로 설정
                 redBall.setScaleX(-1); // 이미지를 좌우 반전
             } else { // 얼굴이 아래에 있는 경우
