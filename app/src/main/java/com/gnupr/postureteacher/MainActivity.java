@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void navigateToActivity(Class<?> targetActivity) {
         Intent intent = new Intent(MainActivity.this, targetActivity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 

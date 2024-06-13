@@ -424,6 +424,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                                 // MainActivity로 이동
                                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                                 startActivity(intent);
                                                 finish();
                                             } else {
