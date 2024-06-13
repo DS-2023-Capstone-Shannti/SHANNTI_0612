@@ -96,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
     Interpreter tfLite;
     TextView reco_name,preview_info,textAbove_preview;
     Button recognize,camera_switch, actions;
-    ImageButton add_face;
+    View add_face;
     CameraSelector cameraSelector;
     boolean developerMode=false;
     float distance= 1.0f;

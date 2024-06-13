@@ -51,6 +51,15 @@ public class ShootingGameOver extends AppCompatActivity {
                 finish();
             }
         });
+        View overlayExit = findViewById(R.id.overlay_exit);
+        overlayExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShootingGameOver.this, GameselectActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         Intent intent = getIntent();
         collisionCount = intent.getIntExtra("collisionCount", 0); // Default to 0 if not found
