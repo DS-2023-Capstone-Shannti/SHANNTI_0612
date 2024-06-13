@@ -673,7 +673,7 @@ public class LungeActivity extends AppCompatActivity implements TextToSpeech.OnI
                 // 대화 상자가 null이 아니고, 표시되어 있을 경우에만 닫기
                 if (msgDlg != null && msgDlg.isShowing()) {
                     msgDlg.dismiss();
-                    tts.speak("운동을 시작합니다. 런지를" + timee +"회 하세요. 자세는" + timee +"초 정도 유지해주세요.", TextToSpeech.QUEUE_FLUSH, null, null);
+                    tts.speak("운동을 시작합니다. 런지를" + timee +"회 하세요.", TextToSpeech.QUEUE_FLUSH, null, null);
                 }
             }
         }, 3500); // 5초 후에 닫기

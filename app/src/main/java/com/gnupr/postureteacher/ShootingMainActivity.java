@@ -984,7 +984,7 @@ public class ShootingMainActivity extends AppCompatActivity {
                 redBall.setScaleX(1); // 이미지를 원래 방향으로
             } else {
                 moveRight = false; // 왼쪽 방향으로 설정
-                redBall.setScaleX(-1); // 이미지를 좌우 반전
+                redBall.setScaleX(-1); // 이미지를 좌우 반
                 startToastMessageRepeater();
             }
         } else if (isRight) {

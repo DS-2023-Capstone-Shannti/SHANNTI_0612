@@ -132,6 +132,7 @@ public class SquatAnalysisActivity extends AppCompatActivity implements TextToSp
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                speak("분석 중.. 자세를 유지해 주세요!");
                 timerTextView.setText("분석 중.. 자세를 유지해 주세요!");
             }
         }, INITIAL_DELAY);
@@ -315,6 +316,7 @@ public class SquatAnalysisActivity extends AppCompatActivity implements TextToSp
                     timerTextView.setText(String.format(Locale.getDefault(), "%d", secondsRemaining));
                     timerHandler.postDelayed(this, 1000);
                 } else {
+                    speak("스쿼트 분석 결과입니다.");
                     timerTextView.setText("스쿼트 분석 결과");
                 }
                 timerHandler.post(timerRunnable);

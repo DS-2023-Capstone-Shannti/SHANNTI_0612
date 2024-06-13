@@ -137,6 +137,7 @@ public class BalanceAnalysisActivity extends AppCompatActivity implements TextTo
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                speak("분석 중.. 자세를 유지해 주세요!");
                 timerTextView.setText("분석 중.. 자세를 유지해 주세요!");
             }
         }, INITIAL_DELAY);
@@ -350,6 +351,7 @@ public class BalanceAnalysisActivity extends AppCompatActivity implements TextTo
                     timerTextView.setText(String.format(Locale.getDefault(), "%d", secondsRemaining));
                     timerHandler.postDelayed(this, 1000);
                 } else {
+                    speak("밸런스 분석 결과입니다.");
                     timerTextView.setText("밸런스 분석 결과");
                 }
                 timerHandler.post(timerRunnable);
