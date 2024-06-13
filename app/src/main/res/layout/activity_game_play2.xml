@@ -24,8 +24,8 @@
         android:layout_height="62dp"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="410dp"
-        android:fontFamily="@font/bmhannapro"
         android:text="0"
+        android:fontFamily="@font/bmhannapro"
         android:textColor="@color/black"
         android:textSize="40dp"
 

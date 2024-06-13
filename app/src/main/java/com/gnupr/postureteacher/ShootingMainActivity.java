@@ -925,7 +925,7 @@ public class ShootingMainActivity extends AppCompatActivity {
 
         // Create a Drawable representing the bounding box
         ShapeDrawable shapeDrawable = new ShapeDrawable(new RectShape());
-        shapeDrawable.getPaint().setColor(Color.RED);
+        shapeDrawable.getPaint().setColor(Color.TRANSPARENT);
         shapeDrawable.getPaint().setStyle(Paint.Style.STROKE);
         shapeDrawable.getPaint().setStrokeWidth(4f);
         shapeDrawable.setBounds(rect);
@@ -965,32 +965,40 @@ public class ShootingMainActivity extends AppCompatActivity {
     private void determineFacePosition(RectF boundingBox) {
         float imageViewWidth = (float) previewView.getWidth();
         float imageViewHeight = (float) previewView.getHeight();
+
         float faceCenterX = boundingBox.centerX();
         float faceCenterY = boundingBox.centerY();
 
-        if (faceCenterX < imageViewWidth / 2) { // 얼굴이 왼쪽에 있는 경우
-            if (faceCenterY < imageViewHeight / 2) { // 얼굴이 위에 있는 경우
-                moveRight = false; // 왼쪽 방향으로 설정
-                redBall.setScaleX(1); // 이미지를 원래 방향으로
-            } else { // 얼굴이 아래에 있는 경우
-                moveRight = false; // 왼쪽 방향으로 설정
-                redBall.setScaleX(-1); // 이미지를 좌우 반전
-                startToastMessageRepeater();
-                //Toast.makeText(getApplicationContext(), "스쿼트 1회!", Toast.LENGTH_SHORT).show();
-            }
-        } else { // 얼굴이 오른쪽에 있는 경우
-            if (faceCenterY < imageViewHeight / 2) { // 얼굴이 위에 있는 경우
-                moveRight = true; // 오른쪽 방향으로 설정
-                redBall.setScaleX(-1); // 이미지를 좌우 반전
-            } else { // 얼굴이 아래에 있는 경우
-                moveRight = true; // 오른쪽 방향으로 설정
-                redBall.setScaleX(1); // 이미지를 원래 방향으로
-                //Toast.makeText(getApplicationContext(), "스쿼트 1회!", Toast.LENGTH_SHORT).show();
-                startToastMessageRepeater();
-            }
+        // Determine horizontal region (left, right)
+        boolean isLeft = faceCenterX < imageViewWidth / 2;
+        boolean isRight = faceCenterX >= imageViewWidth / 2;
 
-            lastCallTime = System.currentTimeMillis();
+        // Determine vertical region (top, middle, bottom)
+        boolean isTop = faceCenterY < imageViewHeight / 3;
+        boolean isMiddleOrBottom = faceCenterY >= imageViewHeight / 3;
+
+        // Apply logic based on position
+        if (isLeft) {
+            if (isTop) {
+                moveRight = false; // 왼쪽 방향으로 설정
+                redBall.setScaleX(1); // 이미지를 원래 방향으로
+            } else {
+                moveRight = false; // 왼쪽 방향으로 설정
+                redBall.setScaleX(-1); // 이미지를 좌우 반전
+                startToastMessageRepeater();
+            }
+        } else if (isRight) {
+            if (isTop) {
+                moveRight = true; // 오른쪽 방향으로 설정
+                redBall.setScaleX(1); // 이미지를 원래 방향으로
+            } else {
+                moveRight = true; // 오른쪽 방향으로 설정
+                redBall.setScaleX(-1); // 이미지를 좌우 반전
+                startToastMessageRepeater();
+            }
         }
+
+        lastCallTime = System.currentTimeMillis();
 
         // 빨간 공 이미지를 좌우로 반전시킴
         if (moveRight) {

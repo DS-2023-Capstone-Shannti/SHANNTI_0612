@@ -76,7 +76,9 @@ public class GamePlayActivity2 extends AppCompatActivity {
     private CountDownTimer gameTimer;
 
     private ImageView[][] imageViews = new ImageView[2][3];
-    private TextView scoreTextView;
+
+    private  TextView scoreTextView;
+
     private int score;
     private Handler handler;
     private Runnable runnable;
@@ -189,7 +191,7 @@ public class GamePlayActivity2 extends AppCompatActivity {
                     Log.d("time", String.valueOf(elapsedTime));
 
                     // 25초에 한 번씩 previewView를 VISIBLE로 설정
-                    if (elapsedTime >= 20000 && previewView.getVisibility() == View.INVISIBLE) {
+                    if (elapsedTime >= 35000 && previewView.getVisibility() == View.INVISIBLE) {
                         mediaPlayer3 = MediaPlayer.create(GamePlayActivity2.this, R.raw.exercise_start); // 효과음 리소스 파일 지정
                         mediaPlayer3.setVolume(1.0f, 1.0f); // 볼륨 설정
                         mediaPlayer3.setLooping(false); // 반복 재생 설정 제거
@@ -748,7 +750,7 @@ public class GamePlayActivity2 extends AppCompatActivity {
                     // 해당 위치에 있는 mole 이미지를 클릭한 것으로 간주하여 점수 획득 및 처리
                     mediaPlayer1.start();
                     score++;
-                    scoreTextView.setText(score);
+                    scoreTextView.setText(String.valueOf(score)); // 정수형 값을 문자열로 변환하여 설정
                     hideMole(imageViews[finalI][finalJ]); // 이미지를 숨깁니다.
                     imageViews[finalI][finalJ].setClickable(false); // 클릭 이벤트 비활성화
                     // 일정 시간 후에 다시 클릭 가능하도록 설정
@@ -764,6 +766,7 @@ public class GamePlayActivity2 extends AppCompatActivity {
             }
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -999,8 +1002,8 @@ public class GamePlayActivity2 extends AppCompatActivity {
                     case 0: // Squat
                         countNum++;
                         count.setText(countNum + "회");
-                        mission.setText("스쿼트 5회");
-                        if (countNum == 5) {
+                        mission.setText("스쿼트 2회");
+                        if (countNum == 2) {
                             completeMission();
                         }
                         break;
@@ -1008,8 +1011,8 @@ public class GamePlayActivity2 extends AppCompatActivity {
                     case 1: // Lunge
                         countNum++;
                         count.setText(countNum + "회");
-                        mission.setText("런지 5회");
-                        if (countNum == 5) {
+                        mission.setText("런지 2회");
+                        if (countNum == 2) {
                             completeMission();
                         }
                         break;
@@ -1077,15 +1080,15 @@ public class GamePlayActivity2 extends AppCompatActivity {
 
         switch (missionIndex) {
             case 0:
-                mission.setText("스쿼트 5회");
+                mission.setText("스쿼트 2회");
                 count.setText("0회");
                 break;
             case 1:
-                mission.setText("런지 5회");
+                mission.setText("런지 2회");
                 count.setText("0회");
                 break;
             case 2:
-                mission.setText("밸런스 10초");
+                mission.setText("밸런스 5초");
                 startBalanceCountdown();
                 break;
         }
@@ -1095,7 +1098,7 @@ public class GamePlayActivity2 extends AppCompatActivity {
 
     private void startBalanceCountdown() {
         isBalanceCountdownRunning = true;
-        new CountDownTimer(10000, 1000) {
+        new CountDownTimer(5000, 1000) {
             public void onTick(long millisUntilFinished) {
                 count.setText(millisUntilFinished / 1000 + "초");
             }

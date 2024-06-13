@@ -3,8 +3,7 @@ package com.gnupr.postureteacher;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,17 +19,16 @@ import com.gnupr.postureteacher.databinding.ActivityMainBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String PREFS_NAME = "UserPrefs";
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
-    private static final String EXERCISE_PREFS_NAME = "ExercisePrefs";
-    private static final String DIFFICULTY_KEY = "selectedDifficulty";
-
     private ActivityMainBinding binding;
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference mDatabaseRef;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,33 +56,61 @@ public class MainActivity extends AppCompatActivity {
         binding.mainTime.setText(String.valueOf(totalExerciseTime));
         binding.mainKcal.setText(String.valueOf(totalExerciseKcal));
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
-        String currentDate = dateFormat.format(new Date());
-        binding.todayDate.setText(currentDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault());
+        String currentDateDisplay = dateFormat.format(new Date());
+        binding.todayDate.setText(currentDateDisplay);
 
         String userId = mFirebaseAuth.getCurrentUser().getUid();
+        Log.d(TAG, "User ID: " + userId);
+
         mDatabaseRef.child("UserAccount").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     UserAccount userAccount = snapshot.getValue(UserAccount.class);
-                    String userName = userAccount.getUserName();
-                    int shotScore = userAccount.getShot_score();
-                    int heroScore = userAccount.getHero_score();
-                    binding.userName.setText(userName + "님");
+                    if (userAccount != null) {
+                        String userName = userAccount.getUserName();
+                        int shotScore = userAccount.getShot_score();
+                        int heroScore = userAccount.getHero_score();
+                        binding.userName.setText(userName + "님");
 
-                    // 점수가 없는 경우를 처리하기 위해 체크
-                    if (shotScore == 0) {
-                        binding.mainScore.setText("0");
-                    } else {
-                        binding.mainScore.setText(String.valueOf(shotScore));
+                        binding.mainScore.setText(shotScore == 0 ? "0" : String.valueOf(shotScore));
+                        binding.mainScore2.setText(heroScore == 0 ? "0" : String.valueOf(heroScore));
                     }
-                    if (heroScore == 0) {
-                        binding.mainScore2.setText("0");
-                    } else {
-                        binding.mainScore2.setText(String.valueOf(heroScore));
-                    }
+
+                    // 현재 날짜와 시간 가져오기
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+                    String currentDate = sdf.format(new Date());
+
+                    // 날짜 경로 하위로 Time과 Kcal 데이터 가져오기
+                    mDatabaseRef.child("UserAccount").child(userId).child(currentDate).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dateSnapshot) {
+                            if (dateSnapshot.exists()) {
+                                Integer time = dateSnapshot.child("Time").getValue(Integer.class);
+                                Integer kcal = dateSnapshot.child("Kcal").getValue(Integer.class);
+
+                                Log.d(TAG, "Time: " + time);
+                                Log.d(TAG, "Kcal: " + kcal);
+
+                                binding.mainTime.setText(time != null ? String.valueOf(time) : "0");
+                                binding.mainKcal.setText(kcal != null ? String.valueOf(kcal) : "0");
+                            } else {
+                                Log.d(TAG, "No data for current date and time");
+                                binding.mainTime.setText("0");
+                                binding.mainKcal.setText("0");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(MainActivity.this, "데이터베이스 오류: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "Database error: " + error.getMessage());
+                        }
+                    });
+
                 } else {
+                    Log.d(TAG, "User not found");
                     binding.userName.setText("샨티님");
                     binding.mainScore.setText("0"); // User not found, set score to 0
                 }
@@ -92,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // onCancelled 이벤트 처리
+                Toast.makeText(MainActivity.this, "데이터베이스 오류: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Database error: " + error.getMessage());
             }
         });
     }
@@ -103,10 +130,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        // 난이도 초기화
-        clearDifficultyPreference();
-
-        // Firebase에서 로그아웃
         mFirebaseAuth.signOut();
 
         // SharedPreferences에서 로그인 정보 삭제
@@ -120,12 +143,5 @@ public class MainActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // 현재 액티비티를 스택에서 제거
         startActivity(intent);
         finish();
-    }
-
-    private void clearDifficultyPreference() {
-        SharedPreferences preferences = getSharedPreferences(EXERCISE_PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.remove(DIFFICULTY_KEY);
-        editor.apply();
     }
 }

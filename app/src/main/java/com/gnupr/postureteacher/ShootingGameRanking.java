@@ -61,7 +61,6 @@ public class ShootingGameRanking extends AppCompatActivity {
         userList = new ArrayList<>();
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Shannti").child("UserAccount");
-
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

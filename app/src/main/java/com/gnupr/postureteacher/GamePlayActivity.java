@@ -102,7 +102,7 @@ public class GamePlayActivity extends AppCompatActivity {
     private static final int SPEECH_REQUEST_CODE_DIARY = 1001;// You can choose any integer value
     private static final int SPEECH_REQUEST_CODE = 102; // You can choose any integer value
 
-//    private static final int GAME_DURATION = 10000; // 게임 시간 (밀리초 단위)
+//    private static final int GAME_DURATION = 60000; // 게임 시간 (밀리초 단위)
 
     private static final int GAME_DURATION = 60000; // 게임 시간 (밀리초 단위)
     private boolean gameRunning = false; // 게임이 실행 중인지 여부를 나타내는 플래그
@@ -191,8 +191,8 @@ public class GamePlayActivity extends AppCompatActivity {
                     elapsedTime += 1000;
                     Log.d("time", String.valueOf(elapsedTime));
 
-                    // 25초에 한 번씩 previewView를 VISIBLE로 설정
-                    if (elapsedTime >= 20000 && previewView.getVisibility() == View.INVISIBLE) {
+                    // 35초에 한 번씩 previewView를 VISIBLE로 설정
+                    if (elapsedTime >= 35000 && previewView.getVisibility() == View.INVISIBLE) {
                         mediaPlayer3 = MediaPlayer.create(GamePlayActivity.this, R.raw.exercise_start); // 효과음 리소스 파일 지정
                         mediaPlayer3.setVolume(1.0f, 1.0f); // 볼륨 설정
                         mediaPlayer3.setLooping(false); // 반복 재생 설정 제거
@@ -302,42 +302,34 @@ public class GamePlayActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        gameEndHandler.removeCallbacks(gameEndRunnable);
         // 뒤로 가기 버튼이 눌렸을 때 게임을 종료
         gameRunning = false;
-        super.onDestroy();
         super.onBackPressed();
-        Intent intent = new Intent(this, GameStartActivity.class);
-        intent.putExtra("SCORE", score);
-        startActivity(intent);
-        finish();
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        gameRunning = false;
-//        gameEndHandler.removeCallbacks(gameEndRunnable);
-//        // 액티비티가 일시 정지되면 타이머를 중지합니다.
-//        gameTimer.cancel();
-//        mediaPlayer2.pause();
-//    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameRunning = false;
+        gameEndHandler.removeCallbacks(gameEndRunnable);
+        // 액티비티가 일시 정지되면 타이머를 중지합니다.
+        gameTimer.cancel();
+        mediaPlayer2.pause();
+    }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        // 액티비티가 다시 시작되면 타이머를 재시작합니다.
-//        gameTimer.start();
-//        mediaPlayer2.start();
-//    }
-
-
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 액티비티가 다시 시작되면 타이머를 재시작합니다.
+        gameTimer.start();
+        mediaPlayer2.start();
+    }
     ////////////////////////////////////////
     @SuppressLint("MissingPermission")
     private void SetBluetooth() {
@@ -754,7 +746,7 @@ public class GamePlayActivity extends AppCompatActivity {
                     // 해당 위치에 있는 mole 이미지를 클릭한 것으로 간주하여 점수 획득 및 처리
                     mediaPlayer1.start();
                     score++;
-                    scoreTextView.setText(score);
+                    scoreTextView.setText(String.valueOf(score)); // 정수형 값을 문자열로 변환하여 설정
                     hideMole(imageViews[finalI][finalJ]); // 이미지를 숨깁니다.
                     imageViews[finalI][finalJ].setClickable(false); // 클릭 이벤트 비활성화
                     // 일정 시간 후에 다시 클릭 가능하도록 설정
@@ -773,8 +765,6 @@ public class GamePlayActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        gameRunning = false;
-        gameTimer.cancel();
         if (mediaPlayer2 != null) {
             mediaPlayer2.release();
             mediaPlayer2 = null;
@@ -1004,18 +994,18 @@ public class GamePlayActivity extends AppCompatActivity {
                 switch (missionIndex) {
                     case 0: // Squat
                         countNum++;
-                        count.setText(countNum + "회");
-                        mission.setText("스쿼트 5회");
-                        if (countNum == 5) {
+                        count.setText("스쿼트 " + countNum + "회");
+                        mission.setText("스쿼트 2회");
+                        if (countNum == 2) {
                             completeMission();
                         }
                         break;
 
                     case 1: // Lunge
                         countNum++;
-                        count.setText(countNum + "회");
-                        mission.setText("런지 5회");
-                        if (countNum == 5) {
+                        count.setText("런지 " + countNum + "회");
+                        mission.setText("런지 2회");
+                        if (countNum == 2) {
                             completeMission();
                         }
                         break;
@@ -1083,15 +1073,15 @@ public class GamePlayActivity extends AppCompatActivity {
 
         switch (missionIndex) {
             case 0:
-                mission.setText("스쿼트 5회");
-                count.setText("0회");
+                mission.setText("스쿼트 2회");
+                count.setText("스쿼트 0회");
                 break;
             case 1:
-                mission.setText("런지 5회");
-                count.setText("0회");
+                mission.setText("런지 2회");
+                count.setText("런지 0회");
                 break;
             case 2:
-                mission.setText("밸런스 10초");
+                mission.setText("밸런스 5초");
                 startBalanceCountdown();
                 break;
         }
@@ -1101,9 +1091,9 @@ public class GamePlayActivity extends AppCompatActivity {
 
     private void startBalanceCountdown() {
         isBalanceCountdownRunning = true;
-        new CountDownTimer(10000, 1000) {
+        new CountDownTimer(5000, 1000) {
             public void onTick(long millisUntilFinished) {
-                count.setText(millisUntilFinished / 1000 + "초");
+                count.setText("남은 시간: " + millisUntilFinished / 1000 + "초");
             }
 
             public void onFinish() {
