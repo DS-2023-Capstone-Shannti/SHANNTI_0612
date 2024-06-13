@@ -39,7 +39,7 @@
             android:layout_marginTop="148dp"
             android:fontFamily="@font/bmhannapro"
             android:hint="비밀번호"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:padding="10dp"
             android:textColor="#000000"
             android:textColorHint="@android:color/transparent" />
@@ -53,7 +53,6 @@
             android:layout_marginTop="210dp"
             android:fontFamily="@font/bmhannapro"
             android:hint="학번"
-            android:inputType="textPassword"
             android:padding="10dp"
             android:textColor="#000000"
             android:textColorHint="@android:color/transparent" />
@@ -67,7 +66,6 @@
             android:layout_marginTop="272dp"
             android:fontFamily="@font/bmhannapro"
             android:hint="전화번호"
-            android:inputType="textPassword"
             android:padding="10dp"
             android:textColor="#000000"
             android:textColorHint="@android:color/transparent" />
