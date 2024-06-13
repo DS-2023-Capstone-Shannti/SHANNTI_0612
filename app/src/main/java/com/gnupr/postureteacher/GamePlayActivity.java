@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
+import android.icu.text.LocaleDisplayNames;
 import android.media.Image;
 import android.os.CountDownTimer;
 import android.annotation.SuppressLint;
@@ -300,6 +301,7 @@ public class GamePlayActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
     public void onBackPressed() {
         // 뒤로 가기 버튼이 눌렸을 때 게임을 종료
         gameRunning = false;
@@ -986,10 +988,14 @@ public class GamePlayActivity extends AppCompatActivity {
 
     private void determineFacePosition(RectF boundingBox) {
         float imageViewHeight = (float) previewView.getHeight();
+        //float thirdHeight = imageViewHeight / 3;
+        float thirdHeight = 200;
         float boundingBoxCenterY = boundingBox.centerY();
 
-        // Check if the bounding box center Y is in the bottom half
-        if (boundingBoxCenterY >= imageViewHeight/2) {
+        // Check if the bounding box center Y is in the middle or bottom third
+        if ((boundingBoxCenterY >= thirdHeight && boundingBoxCenterY < 2 * thirdHeight) ||
+                (boundingBoxCenterY >= 2 * thirdHeight)) {
+
             if (wasInTopHalf && previewView.getVisibility() == View.VISIBLE) {
                 switch (missionIndex) {
                     case 0: // Squat
@@ -1015,15 +1021,14 @@ public class GamePlayActivity extends AppCompatActivity {
                         if (!isBalanceCountdownRunning) {
                             startBalanceCountdown();
                         }
+
                         break;
                 }
-                wasInTopHalf = false; // Reset wasInTopHalf after updating the count
+                wasInTopHalf = false;
             }
-        } else {
-            // If the bounding box center Y is in the top half
-            wasInTopHalf = true; // Set wasInTopHalf to true when the face is in the top half
+        } else if (boundingBoxCenterY < thirdHeight) {
+            wasInTopHalf = true;
         }
-
 
         // Set a visibility change listener for the previewView
         previewView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
@@ -1064,6 +1069,96 @@ public class GamePlayActivity extends AppCompatActivity {
             }
         });
     }
+
+//    private void determineFacePosition(RectF boundingBox) {
+//        float imageViewHeight = (float) previewView.getHeight();
+//        float thirdHeight = imageViewHeight / 3;
+//        float boundingBoxCenterY = boundingBox.centerY();
+//
+//        // 얼굴 위치 로그 출력
+//        Log.d(TAG, "BoundingBox Center Y: " + boundingBoxCenterY + ", countNum: " + countNum);
+//
+//
+//        // Check if the bounding box center Y is in the middle or bottom third
+//        if ((boundingBoxCenterY >= thirdHeight && boundingBoxCenterY < 2 * thirdHeight) ||
+//                (boundingBoxCenterY >= 2 * thirdHeight)) {
+//
+//            Log.d(TAG, "Face is in the middle or bottom third.");
+//
+//            if (wasInTopHalf && previewView.getVisibility() == View.VISIBLE) {
+//                switch (missionIndex) {
+//                    case 0: // Squat
+//                        countNum++;
+//                        count.setText(countNum + "회");
+//                        mission.setText("스쿼트 2회");
+//                        if (countNum == 2) {
+//                            completeMission();
+//                        }
+//                        break;
+//
+//                    case 1: // Lunge
+//                        countNum++;
+//                        count.setText(countNum + "회");
+//                        mission.setText("런지 2회");
+//                        if (countNum == 2) {
+//                            completeMission();
+//                        }
+//                        break;
+//
+//                    case 2: // Balance
+//                        // Balance mission needs to be handled separately
+//                        if (!isBalanceCountdownRunning) {
+//                            startBalanceCountdown();
+//                        }
+//                        break;
+//                }
+//                wasInTopHalf = false;
+//            }
+//        } else if (boundingBoxCenterY < thirdHeight) {
+//            Log.d(TAG, "Face is in the top third.");
+//            wasInTopHalf = true;
+//        }
+//
+//        // Set a visibility change listener for the previewView
+//        previewView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+//            @Override
+//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+//                assignMission();
+//                if (previewView.getVisibility() == View.INVISIBLE) {
+//                    countNum = 0;
+//                    resetMission(); // Reset the mission
+//                    // Remove the listener to avoid unnecessary calls
+//                    previewView.removeOnLayoutChangeListener(this);
+//                }
+//            }
+//        });
+//
+//        previewView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+//            @Override
+//            public void onViewAttachedToWindow(View v) {
+//                if (!missionAssigned) {
+//                    assignMission(); // 프리뷰가 VISIBLE일 때 미션 할당
+//                }
+//            }
+//
+//            @Override
+//            public void onViewDetachedFromWindow(View v) {
+//                // 필요 시 추가 동작
+//            }
+//        });
+//
+//        previewView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                if (previewView.getVisibility() == View.INVISIBLE) {
+//                    countNum = 0; // previewView가 다시 보일 때 countNum 초기화
+//                    previewView.getViewTreeObserver().removeOnGlobalLayoutListener(this); // 리스너 제거
+//                }
+//            }
+//        });
+//    }
+
+
     private void assignMission() {
         if (missionList.isEmpty()) {
             missionList = new ArrayList<>(Arrays.asList(0, 1, 2)); // 모든 미션이 사용되었을 때 초기화
@@ -1148,3 +1243,5 @@ public class GamePlayActivity extends AppCompatActivity {
     }
 
 }
+
+// 이건 일단 가까이서는 카운트 되는 교수님 보여드린 코드
