@@ -87,7 +87,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
-        dayList = new ArrayList<>(Arrays.asList("4/22", "4/23", "4/24", "4/25", "4/26"));
+        dayList = new ArrayList<>(Arrays.asList("6/10", "6/11", "6/12", "6/13", "6/14"));
 
         Prog_time = findViewById(R.id.Prog_time);
         Prog_kcal = findViewById(R.id.Prog_kcal);
@@ -205,7 +205,7 @@ public class CalendarActivity extends AppCompatActivity {
         // 인텐트로부터 점수를 가져옵니다.
         Intent intent = getIntent();
 
-        this.score = intent.getIntExtra("SCORE1", 0);
+        this.score = intent.getIntExtra("SCORE1", 11);
         txtTotalScore.setText(String.valueOf(score*10));
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -256,7 +256,7 @@ public class CalendarActivity extends AppCompatActivity {
         // 격자선 설정 (default = true)
         xAxis.setDrawGridLines(false);
         // 각 막대에 대한 x축 레이블 설정
-        final String[] days = {"4/22", "4/23", "4/24", "4/25", "4/26"};
+        final String[] days = {"6/10", "6/11", "6/12", "6/13", "6/14"};
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
@@ -351,7 +351,7 @@ public class CalendarActivity extends AppCompatActivity {
         String title = "런지 횟수";
 
 
-        ArrayList<Integer> countList = new ArrayList<>(Arrays.asList(1, 1, 2, 2, lungecount));
+        ArrayList<Integer> countList = new ArrayList<>(Arrays.asList(1, 1, 2, 2, 2));
         ArrayList<String> dayList = this.dayList;// 임의 데이터
         for (int i = 0; i < 5; i++) {
             int count = countList.get(i);
@@ -434,7 +434,7 @@ public class CalendarActivity extends AppCompatActivity {
         String title = "밸런스 정확도";
 
 
-        ArrayList<Integer> countList = new ArrayList<>(Arrays.asList(90, 85, 77, 62, balanceaccuracy));
+        ArrayList<Integer> countList = new ArrayList<>(Arrays.asList(90, 85, 77, 62, 80));
         ArrayList<String> dayList = this.dayList;// 임의 데이터
         for (int i = 0; i < 5; i++) {
             int percent = countList.get(i);
