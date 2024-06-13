@@ -9,7 +9,7 @@
         android:id="@+id/tvRank"
         android:layout_width="46dp"
         android:layout_height="wrap_content"
-        android:text="  1"
+        android:text="1"
         android:layout_weight="1"
         android:gravity="center"
         android:fontFamily="@font/digitalt"
@@ -23,7 +23,7 @@
         android:layout_height="70dp"
         android:layout_weight="3"
         android:fontFamily="@font/digitalt"
-        android:text="       User Name"
+        android:text="User Name"
         android:textSize="40sp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
