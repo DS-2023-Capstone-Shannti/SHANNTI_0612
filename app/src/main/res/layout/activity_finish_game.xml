@@ -76,6 +76,7 @@
             android:paddingBottom="16dp"
             android:textColor="@color/white"
             android:textSize="50sp"
+            android:fontFamily="@font/bmhannapro"
             android:layout_marginLeft="480dp"
             android:layout_marginTop="250dp"
             android:textStyle="bold"
