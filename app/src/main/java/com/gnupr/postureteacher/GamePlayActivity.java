@@ -300,36 +300,39 @@ public class GamePlayActivity extends AppCompatActivity {
         finish();
     }
 
-    @Override
     public void onBackPressed() {
-        gameEndHandler.removeCallbacks(gameEndRunnable);
         // 뒤로 가기 버튼이 눌렸을 때 게임을 종료
         gameRunning = false;
+        super.onDestroy();
         super.onBackPressed();
+        Intent intent = new Intent(this, GameStartActivity.class);
+        intent.putExtra("SCORE", score);
+        startActivity(intent);
+        finish();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        gameRunning = false;
-        gameEndHandler.removeCallbacks(gameEndRunnable);
-        // 액티비티가 일시 정지되면 타이머를 중지합니다.
-        gameTimer.cancel();
-        mediaPlayer2.pause();
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        gameRunning = false;
+//        gameEndHandler.removeCallbacks(gameEndRunnable);
+//        // 액티비티가 일시 정지되면 타이머를 중지합니다.
+//        gameTimer.cancel();
+//        mediaPlayer2.pause();
+//    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // 액티비티가 다시 시작되면 타이머를 재시작합니다.
-        gameTimer.start();
-        mediaPlayer2.start();
-    }
+    //    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        // 액티비티가 다시 시작되면 타이머를 재시작합니다.
+//        gameTimer.start();
+//        mediaPlayer2.start();
+//    }
     ////////////////////////////////////////
     @SuppressLint("MissingPermission")
     private void SetBluetooth() {
@@ -983,18 +986,15 @@ public class GamePlayActivity extends AppCompatActivity {
 
     private void determineFacePosition(RectF boundingBox) {
         float imageViewHeight = (float) previewView.getHeight();
-        float thirdHeight = imageViewHeight / 3;
         float boundingBoxCenterY = boundingBox.centerY();
 
-        // Check if the bounding box center Y is in the middle or bottom third
-        if ((boundingBoxCenterY >= thirdHeight && boundingBoxCenterY < 2 * thirdHeight) ||
-                (boundingBoxCenterY >= 2 * thirdHeight)) {
-
+        // Check if the bounding box center Y is in the bottom half
+        if (boundingBoxCenterY >= imageViewHeight/2) {
             if (wasInTopHalf && previewView.getVisibility() == View.VISIBLE) {
                 switch (missionIndex) {
                     case 0: // Squat
                         countNum++;
-                        count.setText("스쿼트 " + countNum + "회");
+                        count.setText(countNum + "회");
                         mission.setText("스쿼트 2회");
                         if (countNum == 2) {
                             completeMission();
@@ -1003,7 +1003,7 @@ public class GamePlayActivity extends AppCompatActivity {
 
                     case 1: // Lunge
                         countNum++;
-                        count.setText("런지 " + countNum + "회");
+                        count.setText(countNum + "회");
                         mission.setText("런지 2회");
                         if (countNum == 2) {
                             completeMission();
@@ -1015,14 +1015,15 @@ public class GamePlayActivity extends AppCompatActivity {
                         if (!isBalanceCountdownRunning) {
                             startBalanceCountdown();
                         }
-
                         break;
                 }
-                wasInTopHalf = false;
+                wasInTopHalf = false; // Reset wasInTopHalf after updating the count
             }
-        } else if (boundingBoxCenterY < thirdHeight) {
-            wasInTopHalf = true;
+        } else {
+            // If the bounding box center Y is in the top half
+            wasInTopHalf = true; // Set wasInTopHalf to true when the face is in the top half
         }
+
 
         // Set a visibility change listener for the previewView
         previewView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
@@ -1074,11 +1075,11 @@ public class GamePlayActivity extends AppCompatActivity {
         switch (missionIndex) {
             case 0:
                 mission.setText("스쿼트 2회");
-                count.setText("스쿼트 0회");
+                count.setText("0회");
                 break;
             case 1:
                 mission.setText("런지 2회");
-                count.setText("런지 0회");
+                count.setText("0회");
                 break;
             case 2:
                 mission.setText("밸런스 5초");
@@ -1093,7 +1094,7 @@ public class GamePlayActivity extends AppCompatActivity {
         isBalanceCountdownRunning = true;
         new CountDownTimer(5000, 1000) {
             public void onTick(long millisUntilFinished) {
-                count.setText("남은 시간: " + millisUntilFinished / 1000 + "초");
+                count.setText(millisUntilFinished / 1000 + "초");
             }
 
             public void onFinish() {

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gameback"
     tools:context=".GamePlayActivity"
     android:screenOrientation="landscape">
@@ -16,7 +17,7 @@
         android:fontFamily="@font/bmhannapro"
         android:textColor="@color/black"
         android:text="60초"
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <TextView
@@ -142,12 +143,11 @@
 
     <FrameLayout
         android:id="@+id/container"
-        android:layout_width="400dp"
-        android:layout_height="300dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="600dp"
+        android:layout_height="400dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="160dp"
-        android:layout_marginBottom="15dp">
+        android:layout_marginLeft="120dp"
+        android:layout_marginBottom="5dp">
 
         <androidx.camera.view.PreviewView
             android:id="@+id/previewView"
@@ -157,20 +157,37 @@
         </androidx.camera.view.PreviewView>
         <TextView
             android:id="@+id/mission"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textStyle="bold"
-            android:text="mission"
-            android:textSize="40sp" />
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/bmhannapro"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="500dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/bmhannapro"
             android:gravity="center_horizontal"
-            android:text="Count"
-            android:textStyle="bold"
-            android:textSize="40dp" />
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/hero_count1"-->
+<!--            android:layout_width="600dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:layout_marginLeft="25dp"-->
+<!--            android:layout_marginTop="0dp"-->
+<!--            app:srcCompat="@drawable/hero_count1">-->
+<!--        </ImageView>-->
     </FrameLayout>
 
 </RelativeLayout>
