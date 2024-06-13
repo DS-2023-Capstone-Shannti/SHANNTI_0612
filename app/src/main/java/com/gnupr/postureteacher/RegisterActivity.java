@@ -137,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
         face_preview.setVisibility(View.INVISIBLE);
         recognize=findViewById(R.id.button3);
         camera_switch=findViewById(R.id.button5);
-        textAbove_preview.setText("Recognized Face:");
+        textAbove_preview.setText("해당 얼굴 등록을 원하시면 +버튼을 눌러주세요");
 //        preview_info.setText("        Recognized Face:");
         //Camera Permission
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -186,7 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    textAbove_preview.setText("Face Preview: ");
+                    textAbove_preview.setText("해당 얼굴 등록을 원하시면 +버튼을 눌러주세요");
                     recognize.setText("Recognize");
                     add_face.setVisibility(View.VISIBLE);
                     reco_name.setVisibility(View.INVISIBLE);

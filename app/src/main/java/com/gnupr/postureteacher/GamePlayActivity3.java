@@ -988,7 +988,7 @@ public class GamePlayActivity3 extends AppCompatActivity {
 
     private void determineFacePosition(RectF boundingBox) {
         float imageViewHeight = (float) previewView.getHeight();
-        float thirdHeight = imageViewHeight / 3;
+        float thirdHeight = 200;
         float boundingBoxCenterY = boundingBox.centerY();
 
         // Check if the bounding box center Y is in the middle or bottom third
