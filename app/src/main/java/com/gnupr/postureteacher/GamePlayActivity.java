@@ -153,7 +153,7 @@ public class GamePlayActivity extends AppCompatActivity {
         mediaPlayer1.setLooping(false); // 반복 재생 설정 제거
 
         // 배경음악을 위한 MediaPlayer 초기화
-        mediaPlayer2 = MediaPlayer.create(this, R.raw.gamemusic); // 배경음악 리소스 파일 지정
+        mediaPlayer2 = MediaPlayer.create(this, R.raw.videoplayback); // 배경음악 리소스 파일 지정
         mediaPlayer2.setVolume(0.3f, 0.3f); // 볼륨 설정
         mediaPlayer2.setLooping(true); // 배경음악 반복 재생 설정
         mediaPlayer2.start(); // 배경음악 재생 시작
